@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: wordpress
+  name: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: wordpress
+    spec:
+      containers:
+      - image: wordpress
+        name: wordpress
+        env:
+                - name: WORDPRESS_DB_HOST
+                  value: {{ .Values.WORDPRESS_DB_HOST }}
+                - name: WORDPRESS_DB_USER
+                  value: {{ .Values.WORDPRESS_DB_USER }}
+                - name: WORDPRESS_DB_PASSWORD
+                  value: {{ .Values.WORDPRESS_DB_PASSWORD }}
+                - name: WORDPRESS_DB_NAME
+                  value: {{ .Values.WORDPRESS_DB_NAME }}
+                - name: WORDPRESS_TABLE_PREFIX
+                  value: {{ .Values.WORDPRESS_TABLE_PREFIX }}
+        resources: {}
+status: {}
